@@ -10,5 +10,7 @@ sequelize.define("tem",{
       name: {
         type: DataTypes.STRING,
       },
+},{
+  timestamps:false
 })
 }

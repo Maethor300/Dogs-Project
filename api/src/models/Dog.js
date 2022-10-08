@@ -14,16 +14,18 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    altura:{
+    height:{
       type: DataTypes.FLOAT,
       allowNull:false,
     },
-    peso: {
+    weight: {
       type:DataTypes.FLOAT,
       allowNull:false
     },
-    añosDeVida: {
+    yearsOfLife: {
       type:DataTypes.INTEGER,
     }
+  },{
+    timestamps:false
   });
 };

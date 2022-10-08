@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const {YOUR_API_KEY} =process.env
-router.get("/", (req,res)=>{
-  axios.get("https://api.thedogapi.com/v1/breeds")
+router.get("/",   (req,res)=>{
+  axios.get(`https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`)
   .then(response => res.json(response.data))
 });
 router.get("/search", async (req,res)=> {
@@ -12,7 +12,7 @@ router.get("/search", async (req,res)=> {
     
     try {
         if(name){ 
-        const apiOriginal = await axios.get(` https://api.thedogapi.com/v1/breeds`)
+        const apiOriginal = await axios.get(` https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`)
         let json1 = await apiOriginal.data;
         let recorrer = json1.filter((i) => i.name === name)
         return res.status(200).send(recorrer)
