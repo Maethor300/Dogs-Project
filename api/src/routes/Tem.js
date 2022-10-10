@@ -24,4 +24,13 @@ router.post("/" ,(req,res)=> {
     next(error)
    })
   })
+router.get("/prueba", async (req,res)=>{
+  let infoTem = await axios.get(`https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`)
+  let data1 = await infoTem.data
+  let recorrer = data1.map(i => ({
+    name: i.temperament
+  }))
+  const agregar = await Tem.bulkCreate(recorrer);
+  res.status(200).json(agregar)
+})
 module.exports = router;

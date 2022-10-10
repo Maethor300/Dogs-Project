@@ -5,12 +5,16 @@ const axios = require("axios");
 const {Op} = require("sequelize");
 const {Dog,Tem} = require("../db.js")
 const {YOUR_API_KEY} =process.env
-router.get("/",(req,res,next)=> {
+router.get("/Home", (req,res)=>{
+  axios.get(`https://api.thedogapi.com/v1/breeds?key${YOUR_API_KEY}`).then(response => res.json(response.data))
+})
+router.get("/search",(req,res,next)=> {
   let {name} = req.query
   let apiOriginal;
   let apiData;
+  try{ 
   if(name){
-    apiOriginal = axios.get(` https://api.thedogapi.com/v1/breeds`)
+    apiOriginal = axios.get(`https://api.thedogapi.com/v1/breeds?key${YOUR_API_KEY}`)
     apiData = Dog.findAll({
     include: Tem,
     where: {
@@ -18,7 +22,7 @@ router.get("/",(req,res,next)=> {
           [Op.iLike]: "%" + name + "%"
         }
         
-    },order : [
+    },order:[
        ["name", "ASC" ]
     ]
    })
@@ -35,7 +39,7 @@ router.get("/",(req,res,next)=> {
        const [dogApi, //respuesta de la api
          dogDb //respuesta de la base de datos
         ] = respuesta;
-       let recorrer = dogApi.data.filter((i) => i.name.includes(name))
+       let recorrer = dogApi.data.filter((i) => i.name.toLowerCase().includes(name.toLowerCase()));
        let filteredDogApi = recorrer.map((i)=>{
         return { //sacar los valores que no quiero enviar
           name: i.name,
@@ -45,40 +49,37 @@ router.get("/",(req,res,next)=> {
         }
        }) 
        let allDogs = [...filteredDogApi, ...dogDb]//concatenar
-       res.send(allDogs)
-   })
+       res.status(200).json(allDogs);
+   })}catch(error){
+    next(error)
+   }
 })
-// router.get("/",(req, res, next)=> {
-//   return Dog.findAll({
-//    include: Tem
-//   })
-//   .then(dogs =>{
-//     res.send(dogs)
-//   }).catch((error)=>{
-//    next(error)
-//   });
-// })
-// router.get("/",   (req,res)=>{
-//   axios.get(`https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`)
-//   .then(response => res.json(response.data))
-// });
-// router.get("/search", async (req,res,next)=> {
-//     let {name} = req.query;
+router.get("/:id", async(req,res,next)=> {
+   let id = parseInt(req.params.id);
+  try { 
+  if(typeof id === "string" && id.length > 8){
+    let dog = await Dog.findByPk(id)
+    res.send(dog);
+  }else {
+    let apiDta = await axios.get(`https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`);
+    let info = await apiDta.data;
+    let filtro = info.filter(i => i.id === id);
+    let recorrer = filtro.map(i => {
     
-//     try {
-//         if(name){ 
-//         const apiOriginal = await axios.get(`https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`)
-//         let json1 = await apiOriginal.data;
-//         let recorrer = json1.filter((i) => i.name === name)
-//         return res.status(200).send(recorrer)
-        
-//   }else{
-//     res.status(404).json({error: "Please a name"})
-//   }
-//     }catch(error){
-//        next(error)
-//     }
-// })
+      return {
+        id: i.id,
+        height:i.height.metric,
+        weight:i.weight.metric,
+        yearsOfLife: i.life_span
+      }
+    })
+  res.send(recorrer)
+  }
+  }
+  catch(error){
+    next(error)
+  }
+}) 
 router.post("/", async (req,res,next)=> {
   try { 
   const {name, height, weight, yearsOfLife} = req.body
