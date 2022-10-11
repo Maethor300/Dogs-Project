@@ -1,5 +1,4 @@
 import "./start.css";
-import react, { Component } from "react";
 import IMG1 from "../../img/perros.jpg"
 import { Link } from "react-router-dom";
 const Inicio = () => {
