@@ -1,9 +1,13 @@
 import './App.css';
+import Inicio from './Componets/start/Start.jsx';
+import { Route,Router } from 'react-router-dom';
+import Search from '../src/Componets/search/Search.jsx'
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <Route exact path= "/" component={Inicio}/>
+      <Route exact path = "/Home" component={Search}/>
     </div>
   );
 }

@@ -6,7 +6,7 @@ const {Op} = require("sequelize");
 const {Dog,Tem} = require("../db.js")
 const {YOUR_API_KEY} =process.env
 router.get("/Home", (req,res)=>{
-  axios.get(`https://api.thedogapi.com/v1/breeds?key${YOUR_API_KEY}`).then(response => res.json(response.data))
+  axios.get(`https://api.thedogapi.com/v1/breeds?key${YOUR_API_KEY}`).then(response => res.status(200).json(response.data))
 })
 router.get("/search",(req,res,next)=> {
   let {name} = req.query
