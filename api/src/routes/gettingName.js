@@ -45,7 +45,8 @@ router.get("/search",(req,res,next)=> {
           name: i.name,
           image: i.image.url,
           temperament: i.temperament,
-          weight:i.weight.metric
+          weight:i.weight.metric,
+          id:i.id
         }
        }) 
        let allDogs = [...filteredDogApi, ...dogDb]//concatenar

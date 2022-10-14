@@ -1,8 +1,8 @@
-import { GET_ALL_DOGS } from "../actions";
+import { GET_ALL_DOGS, GET_BY_NAME } from "../actions";
 
 const initialState = {
     dogs1: [],
-    
+    dogsById: []
 }
 
 export default function reducer (state = initialState, action) {

@@ -1,7 +1,12 @@
 .nav{
+    display: flex;
     background-color: antiquewhite;
+    padding-top:20px;
+    justify-content: center;
 }
 .home{
     text-decoration: none;
     color:black;
+    padding-bottom: 20px;
+    font-size: 20px;
 }
