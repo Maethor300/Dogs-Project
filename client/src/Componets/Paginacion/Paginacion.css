@@ -1,0 +1,35 @@
+
+.nav_Pag{
+    display: flex;
+    justify-content: center;
+}
+ .button_1{
+    background-color: white;
+    width: 35px;
+    height: 30px;
+    border-radius: 3px;
+    border-color: black;
+    margin-top: 20px;
+ }
+ .button_2{
+    background-color: white;
+    width: 42px;
+    height: 30px;
+    border-radius: 3px;
+    border-color: black;
+    margin-left: 5px;
+    margin-top: 20px;
+ }
+ .p_1{
+    margin: 0;
+    font-size: 20px;
+    margin-top: 17px;
+    margin-left: 5px;
+ }
+ .input_1{
+    width: 30px;
+    height: 23px;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+ }

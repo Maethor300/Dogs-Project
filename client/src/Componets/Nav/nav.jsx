@@ -9,7 +9,7 @@ export default class Nav extends Component {
   render() {
     return (
       <div className="nav">
-        <Link to = "/Home">Home</Link>
+        <Link className="home" to = "/">Home</Link>
       </div>
     );
   }

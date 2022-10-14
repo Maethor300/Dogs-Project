@@ -1,3 +1,29 @@
+.items_1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+.name1{
+    font-size: 15px;
+}
 .Image{
-    width:200px;
+    height: 150px;
+    width: 230px; 
+}
+.general{
+    border: 3px black solid;
+    margin-left:12px;
+    margin-top: 12px;
+    padding: 20px;
+}
+.weight{
+    font-size: 15px;
+}
+.height{
+    font-size: 15px;
+}
+.life_span{
+    font-size: 15px;
 }
