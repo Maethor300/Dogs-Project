@@ -12,10 +12,10 @@ router.get("/", (req,res)=> {
     axios.get(`https://api.thedogapi.com/v1/breeds?key=${YOUR_API_KEY}`)
     .then(response => res.json(response.data.map(i => i.temperament)));
 })
-router.post("/" ,(req,res)=> {
+router.post("/" ,(req,res,next)=> {
     
     const {name} = req.body
-  return Tem.create({name})
+  return Tem.create(name)
   .then(newTem=> {
      newTem
      res.status(201).send(newTem)

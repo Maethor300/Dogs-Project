@@ -43,10 +43,11 @@ router.get("/search",(req,res,next)=> {
        let filteredDogApi = recorrer.map((i)=>{
         return { //sacar los valores que no quiero enviar
           name: i.name,
-          image: i.image.url,
+          image: i.image,
           temperament: i.temperament,
-          weight:i.weight.metric,
-          id:i.id
+          weight:i.weight,
+          height:i.height,
+          life_span: i.life_span
         }
        }) 
        let allDogs = [...filteredDogApi, ...dogDb]//concatenar
